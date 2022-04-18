@@ -1,2 +1,2 @@
 # Battleship
-Game created with JavaScript.
+Game created with JavaScript using express and socket.io for multiplayer.
