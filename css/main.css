@@ -135,3 +135,11 @@
 .carrier {
     background-color: black;
 }
+
+.hit {
+    background-color: red;
+}
+  
+.miss {
+    background-color: white;
+}

@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const battleship = document.querySelector('.battleship-container')
     const carrier = document.querySelector('.carrier-container')
     const rotateButton = document.querySelector('#rotate')
+    const startButton = document.querySelector('#start')
     const turnDisplay = document.querySelector('#turn')
     const infoDisplay = document.querySelector('#info')
     let isHorizontal = true
@@ -182,5 +183,122 @@ document.addEventListener('DOMContentLoaded', () => {
     generate(shipArray[2])
     generate(shipArray[3])
     generate(shipArray[4])
+  
+    function playGame() {
+      if (isGameOver) return
+      if (currentPlayer === 'user') {
+        turnDisplay.innerHTML = "Player 1's turn"
+        opponentSquares.forEach(square => square.addEventListener('click', function(e) {
+          revealSquare(square)
+        }))
+      }
+      if (currentPlayer === 'opponent') {
+        turnDisplay.innerHTML = "Player 2's turn"
+        setTimeout(opponentTurn, 1000)
+      }
+    }
+    startButton.addEventListener('click', playGame)
+  
+    let destroyerCount = 0
+    let submarineCount = 0
+    let cruiserCount = 0
+    let battleshipCount = 0
+    let carrierCount = 0
+  
+  
+    function revealSquare(square) {
+      if (!square.classList.contains('hit')) {
+        if (square.classList.contains('destroyer')) destroyerCount++
+        if (square.classList.contains('submarine')) submarineCount++
+        if (square.classList.contains('cruiser')) cruiserCount++
+        if (square.classList.contains('battleship')) battleshipCount++
+        if (square.classList.contains('carrier')) carrierCount++
+      }
+      if (square.classList.contains('taken')) {
+        square.classList.add('hit')
+      } else {
+        square.classList.add('miss')
+      }
+      checkForWins()
+      currentPlayer = 'opponent'
+      playGame()
+    }
+  
+    let oppDestroyerCount = 0
+    let oppSubmarineCount = 0
+    let oppCruiserCount = 0
+    let oppBattleshipCount = 0
+    let oppCarrierCount = 0
+
+    function opponentTurn() {
+      let random = Math.floor(Math.random() * userSquares.length)
+      if (!userSquares[random].classList.contains('hit')) {
+        userSquares[random].classList.add('hit')
+        if (userSquares[random].classList.contains('destroyer')) oppDestroyerCount++
+        if (userSquares[random].classList.contains('submarine')) oppSubmarineCount++
+        if (userSquares[random].classList.contains('cruiser')) oppCruiserCount++
+        if (userSquares[random].classList.contains('battleship')) oppBattleshipCount++
+        if (userSquares[random].classList.contains('carrier')) oppCarrierCount++
+        checkForWins()
+      } else opponentTurn()
+      currentPlayer = 'user'
+      turnDisplay.innerHTML = "Player 1's Turn"
+    }
+
+    function checkForWins() {
+      if (destroyerCount === 2) {
+        infoDisplay.innerHTML = 'You sunk the opponents destroyer'
+        destroyerCount = 10
+      }
+      if (submarineCount === 3) {
+        infoDisplay.innerHTML = 'You sunk the opponents submarine'
+        submarineCount = 10
+      }
+      if (cruiserCount === 3) {
+        infoDisplay.innerHTML = 'You sunk the opponents cruiser'
+        cruiserCount = 10
+      }
+      if (battleshipCount === 4) {
+        infoDisplay.innerHTML = 'You sunk the opponents battleship'
+        battleshipCount = 10
+      }
+      if (carrierCount === 5) {
+        infoDisplay.innerHTML = 'You sunk the opponents carrier'
+        carrierCount = 10
+      }
+      if (oppDestroyerCount === 2) {
+        infoDisplay.innerHTML = 'You sunk the opponents Destroyer'
+        oppDestroyerCount = 10
+      }
+      if (oppSubmarineCount === 3) {
+        infoDisplay.innerHTML = 'You sunk the opponents Submarine'
+        oppSubmarineCount = 10
+      }
+      if (oppCruiserCount === 3) {
+        infoDisplay.innerHTML = 'You sunk the opponents Cruiser'
+        oppCruiserCount = 10
+      }
+      if (oppBattleshipCount === 4) {
+        infoDisplay.innerHTML = 'You sunk the opponents Battleship'
+        oppBattleshipCount = 10
+      }
+      if (oppCarrierCount === 5) {
+        infoDisplay.innerHTML = 'You sunk the opponents Carrier'
+        oppCarrierCount = 10
+      }
+      if ((destroyerCount + submarineCount + cruiserCount + battleshipCount + carrierCount) === 50) {
+        infoDisplay.innerHTML = "YOU WIN"
+        gameOver()
+      }
+      if ((oppDestroyerCount + oppSubmarineCount + oppCruiserCount + oppBattleshipCount + oppCarrierCount) === 50) {
+        infoDisplay.innerHTML = "opponent WINS"
+        gameOver()
+      }
+    }
+  
+    function gameOver() {
+      isGameOver = true
+      startButton.removeEventListener('click', playGame)
+    }
   
 })
