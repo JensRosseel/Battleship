@@ -1,5 +1,14 @@
-.content-container {
+.container {
   display: flex;
+}
+
+.grid-user {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: blue;
+  margin: 20px;
 }
 
 .grid div {
@@ -7,7 +16,7 @@
   height: 40px;
 }
 
-.user-grid {
+.grid-computer {
   width: 400px;
   height: 400px;
   display: flex;
@@ -16,18 +25,11 @@
   margin: 20px;
 }
 
-.opponent-grid {
+.grid-display {
   width: 400px;
   height: 400px;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: lightcoral;
   margin: 20px;
-}
-
-.ship div {
-  width: 40px;
-  height: 40px;
+  background-color: yellow;
 }
 
 .destroyer-container {
@@ -37,7 +39,6 @@
   margin: 10px;
   display: flex;
 }
-
 .destroyer-container-vertical {
   width: 40px;
   height: 80px;
@@ -101,7 +102,7 @@
 .carrier-container {
   width: 200px;
   height: 40px;
-  background-color: black;
+  background-color: green;
   margin: 10px;
   display: flex;
 }
@@ -109,10 +110,15 @@
 .carrier-container-vertical {
   width: 40px;
   height: 200px;
-  background-color: black;
+  background-color: green;
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
+}
+
+.ship div {
+  width: 40px;
+  height: 40px;
 }
 
 .destroyer {
@@ -132,15 +138,15 @@
 }
 
 .carrier {
-  background-color: black;
+  background-color: green;
 }
 
-.hit {
+.boom {
   background-color: red;
 }
 
 .miss {
-  background-color: white;
+  background-color: black;
 }
 
 .connected,
@@ -150,7 +156,7 @@
 
 .connected span,
 .ready span {
-  display: block;
+  display: inline-block;
   width: 1rem;
   height: 1rem;
   background: red;

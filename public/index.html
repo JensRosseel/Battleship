@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/main.css" />
     <script src="/socket.io/socket.io.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="./js/main.js" charset="utf-8"></script>
     <title>Battleship</title>
   </head>
   <body>
-    <button id="single-player">Single Player</button>
-    <button id="multi-player">Multi Player</button>
+    <button id="singlePlayerButton">Single Player</button>
+    <button id="multiPlayerButton">Multiplayer</button>
 
     <div class="player p1">
       Player 1
@@ -24,17 +22,19 @@
       <div class="ready">Ready <span></span></div>
     </div>
 
-    <div class="content-container">
-      <div class="grid user-grid"></div>
-      <div class="grid opponent-grid"></div>
+    <div class="container">
+      <div class="grid grid-user"></div>
+      <div class="grid grid-computer"></div>
     </div>
-    <div class="info-container">
+
+    <div class="hidden-info">
       <button id="start">Start Game</button>
       <button id="rotate">Rotate Your Ships</button>
-      <h3 id="turn">Your Turn</h3>
+      <h3 id="whose-go">Your Go</h3>
       <h3 id="info"></h3>
     </div>
-    <div class="ships-display">
+
+    <div class="grid-display">
       <div class="ship destroyer-container" draggable="true">
         <div id="destroyer-0"></div>
         <div id="destroyer-1"></div>

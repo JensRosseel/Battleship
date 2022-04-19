@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("player-ready", () => {
-    socket.broadcast.emit("opponent-ready", playerIndex);
+    socket.broadcast.emit("enemy-ready", playerIndex);
     connections[playerIndex] = true;
   });
 
